@@ -19,8 +19,8 @@
   (-> (routes
        todo-routes
        main-routes)
-      (wrap wrap-dev false)
-      ;(wrap wrap-dev true)
+      ;(wrap wrap-dev false)
+      (wrap wrap-dev true)
       ;(wrap wrap-dev (:dev env))
       ))
 

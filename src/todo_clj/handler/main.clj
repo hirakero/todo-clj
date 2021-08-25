@@ -1,15 +1,13 @@
 (ns todo-clj.handler.main
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
-            [todo-clj.util.response :as res]))
+            [todo-clj.util.response :as res]
+            [todo-clj.view.main :as view]))
 
-
-(defn home-view [req] ;home-body
-  "<h1>home!</h1>
-   <a href=\"/todo\"todo list</a>")
 
 (defn home [req]
-  (-> (home-view req)
+  #_(throw (Exception. "Test Exception!!"))
+  (-> (view/home-view req)
       res/response
       res/html))
 
