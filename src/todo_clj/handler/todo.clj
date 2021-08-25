@@ -1,6 +1,6 @@
 (ns todo-clj.handler.todo
-  [:require [compojure.core :refer [defroutes context GET POST]]
-   [todo-clj.util.response :as res]])
+  (:require [compojure.core :refer [defroutes context GET POST]]
+            [todo-clj.util.response :as res]))
 
 
 (def todo-list
