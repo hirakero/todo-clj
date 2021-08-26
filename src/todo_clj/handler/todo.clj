@@ -10,15 +10,8 @@
    {:title "buy eggs"}
    {:title "bath wash"}])
 
-(defn todo-index-view [req]
-  `("<h1>todo list</h1>"
-    "<ul>"
-    ~@(for [{:keys [title]} todo-list]
-        (str "<li>" title "</li>"))
-    "</ul>"))
-
 (defn todo-index [req]
-  (-> (view/todo-index-view req)
+  (-> (view/todo-index-view req todo-list)
       res/response
       res/html))
 
