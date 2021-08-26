@@ -3,7 +3,6 @@
             [todo-clj.util.response :as res]
             [todo-clj.view.todo :as view]))
 
-
 (def todo-list
   [{:title "breakfast"}
    {:title "garbage removal"}
@@ -30,10 +29,9 @@
     (GET "/new" _ todo-new)
     (POST "/new" _ todo-new-post)
     (GET "/search" _ todo-search)
-    (context "/:todo-id" _ 
+    (context "/:todo-id" _
       (GET "/" _ todo-show)
       (GET "/edit" _ todo-edit)
       (POST "/edit" _ todo-edit-post)
       (GET "/delete" _ todo-delete)
       (POST "/delete" _ todo-delete-post))))
-

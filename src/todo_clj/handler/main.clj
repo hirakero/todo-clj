@@ -6,7 +6,6 @@
 
 
 (defn home [req]
-  #_(throw (Exception. "Test Exception!!"))
   (-> (view/home-view req)
       res/response
       res/html))
