@@ -5,8 +5,7 @@
             [todo-clj.handler.main :refer [main-routes]]
             [todo-clj.handler.todo :refer [todo-routes]]
             [todo-clj.middleware :refer [wrap-dev]]
-            [environ.core :refer [env]]
-            ))
+            [environ.core :refer [env]]))
 
 (defonce server (atom nil))
 
@@ -23,8 +22,7 @@
        main-routes)
       ;(wrap wrap-dev (:dev env))
       (wrap wrap-dev true)
-      (wrap resource/wrap-resource "public")
-      ))
+      (wrap resource/wrap-resource "public")))
 
 (defn start-server []
   (when-not @server
