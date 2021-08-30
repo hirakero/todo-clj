@@ -3,11 +3,11 @@
             [todo-clj.view.layout :as layout]))
 
 (defn todo-index-view [req todo-list]
-   (->> `([:h1 "todo list"]
-        [:ul
-         ~@(for [{:keys [title]} todo-list]
-             [:li title])])
-      (layout/common req)))
+  (->> `([:h1 "todo list"]
+         [:ul
+          ~@(for [{:keys [title]} todo-list]
+              [:li title])])
+       (layout/common req)))
 
 (defn todo-new-view [req]
   (->> [:section.card
@@ -18,7 +18,9 @@
          [:button.bg-blue "add"])]
        (layout/common req)))
 
-(defn todo-complete-view [req]
+(defn todo-show-view [req todo]
   (->> [:section.card
-        [:h2 "todo added"]]
+        (when-let [{:keys [msg]} (:flash req)]
+          [:div.alert.alert-success [:strong msg]])
+        [:h2 (:title todo)]]
        (layout/common req)))
