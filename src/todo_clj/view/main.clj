@@ -3,8 +3,7 @@
 
 (defn home-view [req]
   (->> [:section.card
-        [:h2 "home!"]
-        [:a {:href "/todo"} "todo list!"]]
+        [:h2 "home"]
+        [:a {:href "/todo"} "todo list"]]
        (layout/common req)))
-
 

@@ -4,7 +4,6 @@
             [todo-clj.util.response :as res]
             [todo-clj.view.main :as view]))
 
-
 (defn home [req]
   (-> (view/home-view req)
       res/response
