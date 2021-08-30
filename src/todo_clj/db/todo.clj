@@ -13,3 +13,7 @@
 
 (defn update-todo [id title]
   (jdbc/update! db/db-spec :todo {:title title} ["id = ?" id]))
+
+(defn delete-todo [id]
+  (jdbc/delete! db/db-spec :todo ["id = ?" id]))
+

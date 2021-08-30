@@ -3,11 +3,14 @@
             [todo-clj.view.layout :as layout]))
 
 (defn todo-index-view [req todo-list]
-  (->> `([:h1 "todo list"]
-         [:ul
-          ~@(for [{:keys [title]} todo-list]
-              [:li title])])
-       (layout/common req)))
+  (->> [:section.card
+        (when-let [{:keys [msg]} (:flash req)]
+          [:div.alert.alert-success [:strong msg]])
+        [:h2 "todo list"]
+        [:ul
+         (for [{:keys [title]} todo-list]
+           [:li title])]]
+        (layout/common req)))
 
 (defn todo-new-view [req]
   (->> [:section.card
@@ -34,4 +37,15 @@
            [:input {:name :title :value (:title todo)
                     :placeholder "enter todo"}]
            [:button.bg-blue "update"])]
+         (layout/common req))))
+
+(defn todo-delete-view [req todo]
+  (let [todo-id (get-in req [:params :todo-id])]
+    (->> [:section.card
+          [:h2 "todo delete"]
+          (hf/form-to
+           [:post (str "/todo/" todo-id "/delete")]
+           [:p "are you sure?"]
+           [:p "*" (:title todo)]
+           [:button.bg-red "delete"])]
          (layout/common req))))
