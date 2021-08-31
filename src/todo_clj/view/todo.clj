@@ -2,6 +2,13 @@
   (:require [hiccup.form :as hf]
             [todo-clj.view.layout :as layout]))
 
+(defn error-messages [req]
+  (when-let [errors (:errors req)]
+    [:ul
+     (for [[k v] errors
+           msg v]
+       [:li.error-message msg])]))
+
 (defn todo-index-view [req todo-list]
   (->> [:section.card
         (when-let [{:keys [msg]} (:flash req)]
@@ -17,6 +24,7 @@
         [:h2 "add todo"]
         (hf/form-to
          [:post "/todo/new"]
+         (error-messages req)
          [:input {:name :title :placeholder "enter your todo"}]
          [:button.bg-blue "add"])]
        (layout/common req)))
@@ -37,6 +45,7 @@
           [:h2 "todo edit"]
           (hf/form-to
            [:post (str "/todo/" todo-id "/edit")]
+           (error-messages req)
            [:input {:name :title :value (:title todo)
                     :placeholder "enter todo"}]
            [:button.bg-blue "update"])]
