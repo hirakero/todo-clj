@@ -1,5 +1,6 @@
 (ns todo-clj.view.todo
   (:require [hiccup.form :as hf]
+            [ring.util.anti-forgery :refer [anti-forgery-field]]
             [todo-clj.view.layout :as layout]))
 
 (defn error-messages [req]
@@ -24,6 +25,7 @@
         [:h2 "add todo"]
         (hf/form-to
          [:post "/todo/new"]
+         (anti-forgery-field)
          (error-messages req)
          [:input {:name :title :placeholder "enter your todo"}]
          [:button.bg-blue "add"])]
@@ -45,6 +47,7 @@
           [:h2 "todo edit"]
           (hf/form-to
            [:post (str "/todo/" todo-id "/edit")]
+           (anti-forgery-field)
            (error-messages req)
            [:input {:name :title :value (:title todo)
                     :placeholder "enter todo"}]
@@ -57,7 +60,9 @@
           [:h2 "todo delete"]
           (hf/form-to
            [:post (str "/todo/" todo-id "/delete")]
+           (anti-forgery-field)
            [:p "are you sure?"]
            [:p "*" (:title todo)]
            [:button.bg-red "delete"])]
          (layout/common req))))
+ 
