@@ -7,19 +7,12 @@
 
 (defonce server (atom nil))
 
-(defn- wrap [handler middleware opt]
-  (if (true? opt)
-    (middleware handler)
-    (if opt
-      (middleware handler opt)
-      handler)))
-
 (def app
   (middleware-set
    (routes
     todo-routes
     main-routes)))
-  
+
 (defn start-server []
   (when-not @server
     (reset! server (server/run-jetty #'app {:port 3000 :join? false}))))
@@ -33,4 +26,3 @@
   (when @server
     (stop-server)
     (start-server)))
- 
